@@ -11,23 +11,23 @@ Alan.Excel
   
 ### Use
 
-  //using Alan.Excel.Import
-  var fileFullPath = Server.MapPath("~/Content/2015year.xlsx");
-  var import = new Alan.Excel.Import.ExcelImport<RepaymentModel>();
-  var models06 = import.ToModels(fileFullPath, "sheetname");
+    //using Alan.Excel.Import
+    var fileFullPath = Server.MapPath("~/Content/2015year.xlsx");
+    var import = new Alan.Excel.Import.ExcelImport<RepaymentModel>();
+    var models06 = import.ToModels(fileFullPath, "sheetname");
   
 Model定义如下:
 
-  public class RepaymentModel
-  {
+
+    public class RepaymentModel
+    {
       [ExcelDesc(Name = "逾期")]
       public string Overlay { get; set; }
-
       [ExcelDesc(Name = "日期")]
       public DateTime Date { get; set; }
-
       [ExcelDesc(Name = "分部")]
       public string StoreCity { get; set; }
-  }
+    }
+  
   
 其中ExcelDesc注解里的Name是Excel里的头名称.
