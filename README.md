@@ -14,7 +14,7 @@ Alan.Excel
     //using Alan.Excel.Import
     var fileFullPath = Server.MapPath("~/Content/2015year.xlsx");
     var import = new Alan.Excel.Import.ExcelImport<RepaymentModel>();
-    var models06 = import.ToModels(fileFullPath, "sheetname");
+    List<RepaymentModel> models = import.ToModels(fileFullPath, "sheetname");
   
 Model定义如下:
 
