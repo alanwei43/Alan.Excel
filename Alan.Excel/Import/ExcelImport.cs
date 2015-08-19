@@ -108,9 +108,9 @@ namespace Alan.Excel.Import
         /// </summary>
         /// <param name="name">Excel表头名字</param>
         /// <returns></returns>
-        private Type GetExcelType(string name)
+        protected Type GetExcelType(string name)
         {
-            var propertyMap = this.PropertyMaps.FirstOrDefault(propMap => propMap.ModelPropertyName == name);
+            var propertyMap = this.PropertyMaps.FirstOrDefault(propMap => propMap.ExcelHeaderName == name);
             if (propertyMap == null) return typeof(string);
             return propertyMap.PropertyType;
         }
