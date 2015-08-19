@@ -4,62 +4,42 @@
         <name>Alan.Excel</name>
     </assembly>
     <members>
-        <member name="F:Alan.Excel.Import.ExcelImport`1._exceptions">
+        <member name="T:Alan.Excel.Import.ExcelImportModel`1">
             <summary>
-            记录异常信息
+            Excel导入生成Model
             </summary>
+            <typeparam name="TModel">实体类型</typeparam>
         </member>
-        <member name="M:Alan.Excel.Import.ExcelImport`1.GetExceptions">
-            <summary>
-            获取异常信息
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="F:Alan.Excel.Import.ExcelImport`1._convertType">
+        <member name="F:Alan.Excel.Import.ExcelImportModel`1._convertType">
             <summary>
             类型转换
             </summary>
         </member>
-        <member name="M:Alan.Excel.Import.ExcelImport`1.InjectConvert(System.String,System.Func{OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,System.Object})">
-            <summary>
-            注入转换器
-            </summary>
-            <param name="typeFullName">匹配的类型名字全称</param>
-            <param name="convert">转换委托(参数一次是: 当前的sheet, Row Index, Column Index)</param>
-        </member>
-        <member name="M:Alan.Excel.Import.ExcelImport`1.InjectConvertType(System.Func{System.Object,System.Type,System.Object})">
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.InjectSetModelValue(System.Func{System.Object,System.Type,System.Object})">
             <summary>
             注入将 Excel Cell 里的值设置到Model时发生的类型转换
             </summary>
             <param name="convert">object:是Excel Cell值, Type: 目标属性的类型</param>
         </member>
-        <member name="M:Alan.Excel.Import.ExcelImport`1.GetExcelType(System.String)">
-            <summary>
-            根据 Excel表头名字获取 此列数据的数据类型
-            </summary>
-            <param name="name">Excel表头名字</param>
-            <returns></returns>
-        </member>
-        <member name="M:Alan.Excel.Import.ExcelImport`1.SetModelValues(`0,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModel(System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             设置对象值
             </summary>
-            <param name="model"></param>
-            <param name="values"></param>
+            <param name="dicts">属性:值</param>
         </member>
-        <member name="P:Alan.Excel.Import.ExcelImport`1.GlobalConverts">
+        <member name="P:Alan.Excel.Import.ExcelImportModel`1.GlobalConverts">
             <summary>
             内置的转换器
             </summary>
         </member>
-        <member name="M:Alan.Excel.Import.ExcelImport`1.ToModels(OfficeOpenXml.ExcelWorksheet)">
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(OfficeOpenXml.ExcelWorksheet)">
             <summary>
             转换成Model列表
             </summary>
             <param name="sheet">ExcelWorksheet</param>
             <returns></returns>
         </member>
-        <member name="M:Alan.Excel.Import.ExcelImport`1.ToModels(System.String,System.String)">
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(System.String,System.String)">
             <summary>
             将某个Sheet转换成Models
             </summary>
@@ -67,13 +47,79 @@
             <param name="sheetName">Sheet名字</param>
             <returns></returns>
         </member>
-        <member name="M:Alan.Excel.Import.ExcelImport`1.ToModels(System.String,System.Int32)">
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(System.String,System.Int32)">
             <summary>
             将某个Sheet转换成Models
             </summary>
             <param name="fileFullPath">Excel文件绝对路径</param>
             <param name="index">Sheet索引</param>
             <returns></returns>
+        </member>
+        <member name="F:Alan.Excel.Import.ExcelImport._exceptions">
+            <summary>
+            记录异常信息
+            </summary>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.GetExceptions">
+            <summary>
+            获取异常信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Alan.Excel.Import.ExcelImport._converts">
+            <summary>
+            获取Sheet单元格的值
+            </summary>
+        </member>
+        <member name="F:Alan.Excel.Import.ExcelImport.PropertyMaps">
+            <summary>
+            Excel 头名字 与 Model 属性名字之间的映射关系
+            </summary>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.#ctor(System.Collections.Generic.List{Alan.Excel.Import.ExcelPropertyMap})">
+            <summary>
+            实例化 属性映射
+            </summary>
+            <param name="propMaps">属性映射</param>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.#ctor(System.Collections.Generic.List{Alan.Excel.Import.ExcelPropertyMap},System.Collections.Generic.Dictionary{System.String,System.Func{OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,System.Object}})">
+            <summary>
+            实例化 属性映射, 转换器
+            </summary>
+            <param name="propMaps">属性映射</param>
+            <param name="converts">转换器</param>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.InjectGetCellValue(System.String,System.Func{OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,System.Object})">
+            <summary>
+            注入转换器
+            </summary>
+            <param name="typeFullName">匹配的类型名字全称</param>
+            <param name="convert">转换委托(参数一次是: 当前的sheet, Row Index, Column Index)</param>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.InjectPropertyMap(System.Collections.Generic.List{Alan.Excel.Import.ExcelPropertyMap})">
+            <summary>
+            注入 自己的映射
+            </summary>
+            <param name="maps"></param>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.GetExcelType(System.String)">
+            <summary>
+            根据 Excel表头名字获取 此列数据的数据类型
+            </summary>
+            <param name="name">Excel表头名字</param>
+            <returns></returns>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.GetRows(OfficeOpenXml.ExcelWorksheet)">
+            <summary>
+            获取所有的行
+            </summary>
+            <param name="sheet"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Alan.Excel.Import.ExcelImport.GlobalConverts">
+            <summary>
+            内置的转换器
+            </summary>
         </member>
         <member name="M:Alan.Excel.Import.ImportUtils.Sheets(System.String,System.Action{OfficeOpenXml.ExcelWorksheets})">
             <summary>
@@ -97,6 +143,27 @@
             <param name="fileFullPath">Excel文件绝对路径</param>
             <param name="index">Excel Sheet索引</param>
             <param name="callback">回调</param>
+        </member>
+        <member name="T:Alan.Excel.Import.ExcelPropertyMap">
+            <summary>
+            Model属性和Excel Header Name之间的映射
+            </summary>
+        </member>
+        <member name="P:Alan.Excel.Import.ExcelPropertyMap.ModelPropertyName">
+            <summary>
+            Model属性
+            </summary>
+        </member>
+        <member name="P:Alan.Excel.Import.ExcelPropertyMap.ExcelHeaderName">
+            <summary>
+            Excel header name
+            </summary>
+        </member>
+        <member name="P:Alan.Excel.Import.ExcelPropertyMap.PropertyType">
+            <summary>
+            属性类型
+            如果为空 则使用反射时获取的Model的属性的类型
+            </summary>
         </member>
     </members>
 </doc>

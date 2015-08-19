@@ -47,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Import\ExcelDescAttribute.cs" />
+    <Compile Include="Import\ExcelImportModel.cs" />
     <Compile Include="Import\ExcelImport.cs" />
     <Compile Include="Import\ImportUtils.cs" />
+    <Compile Include="Import\PropertyMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

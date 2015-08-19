@@ -15,7 +15,7 @@ namespace Alan.Excel.Test
             var fileFullPath = @"E:\Projects\AspNetMvc\AspNetMvc\Content\2015year.xlsx";
 
 
-            var import = new Alan.Excel.Import.ExcelImport<RepaymentModel>();
+            var import = new Alan.Excel.Import.ExcelImportModel<RepaymentModel>();
             var models = import.ToModels(fileFullPath, "201506借款客户总表");
         }
     }
