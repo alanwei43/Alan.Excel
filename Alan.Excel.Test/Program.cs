@@ -16,6 +16,8 @@ namespace Alan.Excel.Test
 
 
             var import = new Alan.Excel.Import.ExcelImportModel<RepaymentModel>();
+            import.InjectPropertyMap(new ExcelPropertyMap("Overlay", "逾期", typeof(string)));
+            import.InjectPropertyMap(new ExcelPropertyMap("Date", "日期", typeof(DateTime)));
             var models = import.ToModels(fileFullPath, "201506借款客户总表");
         }
     }
@@ -23,13 +25,13 @@ namespace Alan.Excel.Test
 
     public class RepaymentModel
     {
-        [ExcelDesc(Name = "逾期")]
+        //[ExcelDesc(Name = "逾期")]
         public string Overlay { get; set; }
 
-        [ExcelDesc(Name = "日期")]
+        //[ExcelDesc(Name = "日期")]
         public DateTime Date { get; set; }
 
-        [ExcelDesc(Name = "分部")]
+        //[ExcelDesc(Name = "分部")]
         public string StoreCity { get; set; }
 
         [ExcelDesc(Name = "门店")]

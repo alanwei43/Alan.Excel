@@ -87,9 +87,19 @@ namespace Alan.Excel.Import
         /// 注入 自己的映射
         /// </summary>
         /// <param name="maps"></param>
-        public void InjectPropertyMap(List<ExcelPropertyMap> maps)
+        public void ReplacePropertyMap(List<ExcelPropertyMap> maps)
         {
             this.PropertyMaps = maps ?? new List<ExcelPropertyMap>();
+        }
+
+        /// <summary>
+        /// 注入自己的映射
+        /// </summary>
+        /// <param name="map">映射关系</param>
+        public void InjectPropertyMap(ExcelPropertyMap map)
+        {
+            if (this.PropertyMaps == null) this.PropertyMaps = new List<ExcelPropertyMap>();
+            this.PropertyMaps.Add(map);
         }
         #endregion
 

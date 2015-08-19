@@ -96,11 +96,17 @@
             <param name="typeFullName">匹配的类型名字全称</param>
             <param name="convert">转换委托(参数一次是: 当前的sheet, Row Index, Column Index)</param>
         </member>
-        <member name="M:Alan.Excel.Import.ExcelImport.InjectPropertyMap(System.Collections.Generic.List{Alan.Excel.Import.ExcelPropertyMap})">
+        <member name="M:Alan.Excel.Import.ExcelImport.ReplacePropertyMap(System.Collections.Generic.List{Alan.Excel.Import.ExcelPropertyMap})">
             <summary>
             注入 自己的映射
             </summary>
             <param name="maps"></param>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.InjectPropertyMap(Alan.Excel.Import.ExcelPropertyMap)">
+            <summary>
+            注入自己的映射
+            </summary>
+            <param name="map">映射关系</param>
         </member>
         <member name="M:Alan.Excel.Import.ExcelImport.GetExcelType(System.String)">
             <summary>
@@ -148,6 +154,14 @@
             <summary>
             Model属性和Excel Header Name之间的映射
             </summary>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelPropertyMap.#ctor(System.String,System.String,System.Type)">
+            <summary>
+            实例化 Map
+            </summary>
+            <param name="propName">Model Property Name</param>
+            <param name="headerName">Excel Header Name</param>
+            <param name="propType">Model Property Type</param>
         </member>
         <member name="P:Alan.Excel.Import.ExcelPropertyMap.ModelPropertyName">
             <summary>

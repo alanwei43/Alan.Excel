@@ -7,6 +7,20 @@ namespace Alan.Excel.Import
     /// </summary>
     public class ExcelPropertyMap
     {
+        public ExcelPropertyMap() { }
+
+        /// <summary>
+        /// 实例化 Map
+        /// </summary>
+        /// <param name="propName">Model Property Name</param>
+        /// <param name="headerName">Excel Header Name</param>
+        /// <param name="propType">Model Property Type</param>
+        public ExcelPropertyMap(string propName, string headerName, Type propType)
+        {
+            this.ModelPropertyName = propName;
+            this.ExcelHeaderName = headerName;
+            this.PropertyType = propType;
+        }
         /// <summary>
         /// Model属性
         /// </summary>
