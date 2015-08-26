@@ -44,3 +44,12 @@ Model定义如下:
 	import.InjectPropertyMap(new ExcelPropertyMap("StoreCity", "分部", typeof(string)));
 
 现在Excel里的"店址"和"分部"都会映射到StoreCity.
+
+### Update 1.2.5
+在 1.2.5版本中新增以Fluent方式注入ExcelPropertyMap:
+	
+	var maps = ExcelPropertyMap
+		.Push("Overlay", "逾期", typeof(string))
+		.Push("Date", "日期", typeof(DateTime))
+		.Get();
+
