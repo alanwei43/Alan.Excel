@@ -46,7 +46,7 @@ Model定义如下:
 现在Excel里的"店址"和"分部"都会映射到StoreCity.
 
 ### Update 1.2.5
-在 1.2.5版本中新增以Fluent方式注入ExcelPropertyMap:
+在 1.2.5版本中新增以Fluent方式获取ExcelPropertyMap:
 	
 	var maps = Alan.Excel.Import.ExcelPropertyMap
 		.Push("OverdueId", "逾期", typeof (string))
