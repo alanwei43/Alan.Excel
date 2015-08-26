@@ -48,11 +48,12 @@ Model定义如下:
 ### Update 1.2.5
 在 1.2.5版本中新增以Fluent方式注入ExcelPropertyMap:
 	
-	var maps = Alan.Excel.Import.ExcelPropertyMap.Push("OverdueId", "逾期", typeof (string))
-	.Push("LoanDate", "日期", typeof (DateTime))
-	.Push("StoreAddress", "分部", typeof (string))
-	.Push("Store", "门店", typeof (string))
-	.Push("ApplyNo", "申请编号", typeof (string))
-	.Push("Age", "年龄", typeof (int))
-	.Get();
+	var maps = Alan.Excel.Import.ExcelPropertyMap
+		.Push("OverdueId", "逾期", typeof (string))
+		.Push("LoanDate", "日期", typeof (DateTime))
+		.Push("StoreAddress", "分部", typeof (string))
+		.Push("Store", "门店", typeof (string))
+		.Push("ApplyNo", "申请编号", typeof (string))
+		.Push("Age", "年龄", typeof (int))
+		.Get();
 
