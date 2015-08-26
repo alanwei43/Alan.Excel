@@ -101,6 +101,16 @@ namespace Alan.Excel.Import
             if (this.PropertyMaps == null) this.PropertyMaps = new List<ExcelPropertyMap>();
             this.PropertyMaps.Add(map);
         }
+
+        /// <summary>
+        /// 一次注入多个自己的映射
+        /// </summary>
+        /// <param name="maps"></param>
+        public void InjectPropertyMaps(List<ExcelPropertyMap> maps)
+        {
+            if (this.PropertyMaps == null) this.PropertyMaps = new List<ExcelPropertyMap>();
+            this.PropertyMaps.AddRange(maps);
+        }
         #endregion
 
         /// <summary>
@@ -176,7 +186,13 @@ namespace Alan.Excel.Import
             get
             {
                 var converts = new Dictionary<string, Func<ExcelWorksheet, int, int, object>>();
-                converts.Add(typeof(DateTime).FullName, (sheet, row, column) => sheet.GetValue<DateTime>(row, column));
+                converts.Add(typeof(DateTime).FullName, (sheet, row, column) =>
+                {
+                    var value = sheet.GetValue<DateTime>(row, column);
+                    if (value == default(DateTime))
+                        return new DateTime(1970, 1, 1);
+                    return value;
+                });
                 return converts;
             }
         }

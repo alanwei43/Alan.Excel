@@ -15,9 +15,13 @@ namespace Alan.Excel.Test
             var fileFullPath = @"E:\Projects\AspNetMvc\AspNetMvc\Content\2015year.xlsx";
 
 
+            var maps = ExcelPropertyMap
+                .Push("Overlay", "逾期", typeof(string))
+                .Push("Date", "日期", typeof(DateTime))
+                .Get();
+
             var import = new Alan.Excel.Import.ExcelImportModel<RepaymentModel>();
-            import.InjectPropertyMap(new ExcelPropertyMap("Overlay", "逾期", typeof(string)));
-            import.InjectPropertyMap(new ExcelPropertyMap("Date", "日期", typeof(DateTime)));
+            import.InjectPropertyMaps(maps);
             var models = import.ToModels(fileFullPath, "201506借款客户总表");
         }
     }

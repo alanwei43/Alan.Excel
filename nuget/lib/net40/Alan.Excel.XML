@@ -108,6 +108,12 @@
             </summary>
             <param name="map">映射关系</param>
         </member>
+        <member name="M:Alan.Excel.Import.ExcelImport.InjectPropertyMaps(System.Collections.Generic.List{Alan.Excel.Import.ExcelPropertyMap})">
+            <summary>
+            一次注入多个自己的映射
+            </summary>
+            <param name="maps"></param>
+        </member>
         <member name="M:Alan.Excel.Import.ExcelImport.GetExcelType(System.String)">
             <summary>
             根据 Excel表头名字获取 此列数据的数据类型
@@ -178,6 +184,27 @@
             属性类型
             如果为空 则使用反射时获取的Model的属性的类型
             </summary>
+        </member>
+        <member name="F:Alan.Excel.Import.ExcelPropertyMapHelper._maps">
+            <summary>
+            ExcelPropertyMaps
+            </summary>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelPropertyMapHelper.Push(System.String,System.String,System.Type)">
+            <summary>
+            添加
+            </summary>
+            <param name="propName">Model Property Name</param>
+            <param name="headerName">Excel Header Name</param>
+            <param name="propType">Model Property Type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelPropertyMapHelper.Push(Alan.Excel.Import.ExcelPropertyMap)">
+            <summary>
+            添加
+            </summary>
+            <param name="map"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>
