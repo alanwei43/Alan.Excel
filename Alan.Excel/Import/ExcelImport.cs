@@ -6,6 +6,10 @@ using OfficeOpenXml;
 
 namespace Alan.Excel.Import
 {
+    /// <summary>
+    /// Excel导入的基类, 可以通过继承这个类来实现自定义的功能
+    /// ExcelImportModel就是这个类的一个实现
+    /// </summary>
     public class ExcelImport
     {
         #region Exception Record

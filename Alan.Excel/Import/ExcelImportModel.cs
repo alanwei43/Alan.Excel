@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using OfficeOpenXml;
 namespace Alan.Excel.Import
 {
     /// <summary>
-    /// Excel导入生成Model
+    /// Excel导入生成Model, ExcelImport的一个实现
     /// </summary>
     /// <typeparam name="TModel">实体类型</typeparam>
     public class ExcelImportModel<TModel> : ExcelImport
@@ -115,6 +116,74 @@ namespace Alan.Excel.Import
             return rows.Select(this.ToModel).ToList();
         }
 
+        /// <summary>
+        /// 将Excel的文件流的所有Sheet转换成Model列表
+        /// </summary>
+        /// <param name="stream">Excel文件流</param>
+        /// <returns></returns>
+        public List<TModel> ToModels(Stream stream)
+        {
+            var models = new List<TModel>();
+            ImportUtils.Sheets(stream, sheets =>
+            {
+                for (var i = 0; i < sheets.Count; i++)
+                {
+                    var sheet = sheets[i];
+                    models.AddRange(this.ToModels(sheet));
+                }
+            });
+            return models;
+        }
+
+        /// <summary>
+        /// 将Excel的文件流的指定Sheet转换成Model列表
+        /// </summary>
+        /// <param name="stream">Excel文件流</param>
+        /// <param name="sheetName">Sheet的名称</param>
+        /// <returns>Model列表</returns>
+        public List<TModel> ToModels(Stream stream, string sheetName)
+        {
+            var models = new List<TModel>();
+            ImportUtils.Sheet(stream, sheetName, sheet =>
+            {
+                models = ToModels(sheet);
+            });
+            return models;
+        }
+
+        /// <summary>
+        /// 将Excel文件流的指定Sheet转换成Model列表
+        /// </summary>
+        /// <param name="stream">Excel文件流</param>
+        /// <param name="index">Sheet索引</param>
+        /// <returns>Model列表</returns>
+        public List<TModel> ToModels(Stream stream, int index)
+        {
+            var models = new List<TModel>();
+            ImportUtils.Sheet(stream, index, sheet =>
+            {
+                models = ToModels(sheet);
+            });
+            return models;
+        }
+
+        /// <summary>
+        /// 将Excel文件的所有Sheet转换成Model列表
+        /// </summary>
+        /// <param name="fileFullPath">Excel文件路径</param>
+        /// <returns>Model列表</returns>
+        public List<TModel> ToModels(string fileFullPath)
+        {
+            var models = new List<TModel>();
+            ImportUtils.Sheets(fileFullPath, sheets =>
+            {
+                for (var i = 0; i < sheets.Count; i++)
+                {
+                    models.AddRange(this.ToModels(sheets[i]));
+                }
+            });
+            return models;
+        }
 
         /// <summary>
         /// 将某个Sheet转换成Models

@@ -49,6 +49,9 @@ namespace Alan.Excel.Import
         }
     }
 
+    /// <summary>
+    /// ExcelPropertyMap 实用方法
+    /// </summary>
     public class ExcelPropertyMapHelper
     {
         /// <summary>

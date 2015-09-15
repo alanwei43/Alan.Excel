@@ -6,7 +6,7 @@
     <members>
         <member name="T:Alan.Excel.Import.ExcelImportModel`1">
             <summary>
-            Excel导入生成Model
+            Excel导入生成Model, ExcelImport的一个实现
             </summary>
             <typeparam name="TModel">实体类型</typeparam>
         </member>
@@ -39,6 +39,36 @@
             <param name="sheet">ExcelWorksheet</param>
             <returns></returns>
         </member>
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(System.IO.Stream)">
+            <summary>
+            将Excel的文件流的所有Sheet转换成Model列表
+            </summary>
+            <param name="stream">Excel文件流</param>
+            <returns></returns>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(System.IO.Stream,System.String)">
+            <summary>
+            将Excel的文件流的指定Sheet转换成Model列表
+            </summary>
+            <param name="stream">Excel文件流</param>
+            <param name="sheetName">Sheet的名称</param>
+            <returns>Model列表</returns>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(System.IO.Stream,System.Int32)">
+            <summary>
+            将Excel文件流的指定Sheet转换成Model列表
+            </summary>
+            <param name="stream">Excel文件流</param>
+            <param name="index">Sheet索引</param>
+            <returns>Model列表</returns>
+        </member>
+        <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(System.String)">
+            <summary>
+            将Excel文件的所有Sheet转换成Model列表
+            </summary>
+            <param name="fileFullPath">Excel文件路径</param>
+            <returns>Model列表</returns>
+        </member>
         <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(System.String,System.String)">
             <summary>
             将某个Sheet转换成Models
@@ -54,6 +84,12 @@
             <param name="fileFullPath">Excel文件绝对路径</param>
             <param name="index">Sheet索引</param>
             <returns></returns>
+        </member>
+        <member name="T:Alan.Excel.Import.ExcelImport">
+            <summary>
+            Excel导入的基类, 可以通过继承这个类来实现自定义的功能
+            ExcelImportModel就是这个类的一个实现
+            </summary>
         </member>
         <member name="F:Alan.Excel.Import.ExcelImport._exceptions">
             <summary>
@@ -133,6 +169,34 @@
             内置的转换器
             </summary>
         </member>
+        <member name="T:Alan.Excel.Import.ImportUtils">
+            <summary>
+            Excel导入模块的实用方法
+            </summary>
+        </member>
+        <member name="M:Alan.Excel.Import.ImportUtils.Sheets(System.IO.Stream,System.Action{OfficeOpenXml.ExcelWorksheets})">
+            <summary>
+            遍历所有Sheets
+            </summary>
+            <param name="stream">Excel文件流</param>
+            <param name="callback">回调</param>
+        </member>
+        <member name="M:Alan.Excel.Import.ImportUtils.Sheet(System.IO.Stream,System.Int32,System.Action{OfficeOpenXml.ExcelWorksheet})">
+            <summary>
+            获取指定的Sheet根据sheet的索引
+            </summary>
+            <param name="stream">Excel文件流</param>
+            <param name="index">Sheet索引</param>
+            <param name="callback">回调</param>
+        </member>
+        <member name="M:Alan.Excel.Import.ImportUtils.Sheet(System.IO.Stream,System.String,System.Action{OfficeOpenXml.ExcelWorksheet})">
+            <summary>
+            获取指定的Sheet根据Sheet的名字
+            </summary>
+            <param name="stream">Excel文件流</param>
+            <param name="sheetName">Sheet的名字</param>
+            <param name="callback">回调</param>
+        </member>
         <member name="M:Alan.Excel.Import.ImportUtils.Sheets(System.String,System.Action{OfficeOpenXml.ExcelWorksheets})">
             <summary>
             遍历所有Sheets
@@ -183,6 +247,11 @@
             <summary>
             属性类型
             如果为空 则使用反射时获取的Model的属性的类型
+            </summary>
+        </member>
+        <member name="T:Alan.Excel.Import.ExcelPropertyMapHelper">
+            <summary>
+            ExcelPropertyMap 实用方法
             </summary>
         </member>
         <member name="F:Alan.Excel.Import.ExcelPropertyMapHelper._maps">
