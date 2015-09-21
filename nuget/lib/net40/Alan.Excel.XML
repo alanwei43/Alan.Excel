@@ -27,11 +27,6 @@
             </summary>
             <param name="dicts">属性:值</param>
         </member>
-        <member name="P:Alan.Excel.Import.ExcelImportModel`1.GlobalConverts">
-            <summary>
-            内置的转换器
-            </summary>
-        </member>
         <member name="M:Alan.Excel.Import.ExcelImportModel`1.ToModels(OfficeOpenXml.ExcelWorksheet)">
             <summary>
             转换成Model列表

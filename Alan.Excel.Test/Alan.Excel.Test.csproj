@@ -41,6 +41,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Ysd.DataAccessLayer">
+      <HintPath>..\..\TemplateV2\Ysd.DataAccessLayer\bin\Debug\Ysd.DataAccessLayer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />

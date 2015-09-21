@@ -44,7 +44,12 @@ namespace Alan.Excel.Import
         /// </summary>
         protected List<ExcelPropertyMap> PropertyMaps;
 
-        protected ExcelImport() { }
+        protected ExcelImport()
+        {
+            this.PropertyMaps = new List<ExcelPropertyMap>();
+            this._exceptions = new List<Exception>();
+            this._converts = new Dictionary<string, Func<ExcelWorksheet, int, int, object>>();
+        }
 
         /// <summary>
         /// 实例化 属性映射
@@ -82,6 +87,8 @@ namespace Alan.Excel.Import
         /// <param name="convert">转换委托(参数一次是: 当前的sheet, Row Index, Column Index)</param>
         public bool InjectGetCellValue(string typeFullName, Func<ExcelWorksheet, int, int, object> convert)
         {
+            if (this._converts == null) this._converts = new Dictionary<string, Func<ExcelWorksheet, int, int, object>>();
+
             if (this._converts.ContainsKey(typeFullName)) return false;
             this._converts[typeFullName] = convert;
             return true;

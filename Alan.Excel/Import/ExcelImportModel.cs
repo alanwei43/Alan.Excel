@@ -26,10 +26,9 @@ namespace Alan.Excel.Import
         };
 
 
-        public ExcelImportModel()
+        public ExcelImportModel() : base()
         {
-            //初始化 _propertyMaps
-            if (this.PropertyMaps == null) this.PropertyMaps = new List<ExcelPropertyMap>();
+
             var model = new TModel();
             model.GetType().GetProperties().ToList().ForEach(property =>
             {
@@ -73,8 +72,11 @@ namespace Alan.Excel.Import
             {
                 var propertyMap = this.PropertyMaps.FirstOrDefault(propMap => propMap.ModelPropertyName == property.Name);
                 if (propertyMap == null) return;    //在映射里找不到这个属性
-                if (!dicts.ContainsKey(propertyMap.ExcelHeaderName)) return;   //字典里没有对应的Excel值
-                var value = dicts[propertyMap.ExcelHeaderName];
+
+                var headerName = propertyMap.ExcelHeaderName ?? "";
+                if (!dicts.ContainsKey(headerName)) return;   //字典里没有对应的Excel值
+
+                var value = dicts[headerName];
                 if (value == null) return;      //字典里得值为空
 
                 try
@@ -91,18 +93,18 @@ namespace Alan.Excel.Import
         }
 
 
-        /// <summary>
-        /// 内置的转换器
-        /// </summary>
-        private Dictionary<string, Func<ExcelWorksheet, int, int, object>> GlobalConverts
-        {
-            get
-            {
-                var converts = new Dictionary<string, Func<ExcelWorksheet, int, int, object>>();
-                converts.Add(typeof(DateTime).FullName, (sheet, row, column) => sheet.GetValue<DateTime>(row, column));
-                return converts;
-            }
-        }
+        ///// <summary>
+        ///// 内置的转换器
+        ///// </summary>
+        //private Dictionary<string, Func<ExcelWorksheet, int, int, object>> GlobalConverts
+        //{
+        //    get
+        //    {
+        //        var converts = new Dictionary<string, Func<ExcelWorksheet, int, int, object>>();
+        //        converts.Add(typeof(DateTime).FullName, (sheet, row, column) => sheet.GetValue<DateTime>(row, column));
+        //        return converts;
+        //    }
+        //}
 
 
         /// <summary>
@@ -112,7 +114,7 @@ namespace Alan.Excel.Import
         /// <returns></returns>
         public List<TModel> ToModels(ExcelWorksheet sheet)
         {
-            var rows = this.GetRows(sheet);
+            var rows = base.GetRows(sheet);
             return rows.Select(this.ToModel).ToList();
         }
 
