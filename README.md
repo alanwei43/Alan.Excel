@@ -1,3 +1,5 @@
+建议使用: [Alan.OfficeExcel](https://github.com/Allen-Wei/Alan.OfficeExcel)
+
 # Alan.Excel
 Alan.Excel
 
